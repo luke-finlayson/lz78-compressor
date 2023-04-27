@@ -1,0 +1,6 @@
+.vscode
+*.out
+*.odinc
+*.txt
+java
+.DS_Store
