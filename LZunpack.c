@@ -1,8 +1,4 @@
-#include <stdbool.h>
-#include <stdio.h>
 #include <math.h>
-
-#include "utils.c"
 #include "reader.c"
 #include "writer.c"
 

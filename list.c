@@ -1,3 +1,10 @@
+#ifndef STD
+  #define STD
+  #include "stdio.h"
+  #include "stdlib.h"
+  #include "stdbool.h"
+#endif
+
 struct ListNode {
   int value;
   struct ListNode* next;

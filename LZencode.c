@@ -1,22 +1,27 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<stdbool.h>
-
-#include "utils.c"
 #include "reader.c"
 #include "writer.c"
-
-#include "list.c"
 #include "trie.c"
 
+/**
+ * Reads from standard input and uses a Trie to encode
+ * the hexadecimal values using LZ78, outputting the
+ * entries to standard output.
+ * 
+ * Output format: [32bit phrase number][8 bit hexadecimal mismatched symbol]
+ * (5 bytes total per entry)
+ * 
+ * Created by Luke Finlayson, 1557835
+ */
 int main() {
   // Fill the initial read buffer
   fillBuffer();
 
+  // Create the linked list to keep track of the longest matching phrase
   struct ListNode* word = NULL;
   struct TrieNode* root = (struct TrieNode*) malloc(sizeof( struct TrieNode ));
   root->value = 1;
 
+  // Read input file nibble by nibble until the end of the file is reached
   while (readerHas(4)) {
     int hex = read(4);
     

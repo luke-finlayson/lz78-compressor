@@ -1,3 +1,10 @@
+#ifndef STD
+  #define STD
+  #include "stdio.h"
+  #include "stdlib.h"
+  #include "stdbool.h"
+#endif
+
 const int BYTE_SIZE = 8;
 const int INTEGER_SIZE = 32;
 const int LONG_SIZE = 64;

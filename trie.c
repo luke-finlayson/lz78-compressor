@@ -1,3 +1,5 @@
+#include "list.c"
+
 struct TrieNode {
   struct TrieNode* children[16];
   int parent;
