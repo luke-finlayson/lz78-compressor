@@ -23,19 +23,19 @@ struct TrieNode* insertIntoTrie(struct TrieNode* root, struct ListNode* word) {
   // Traverse the tree as each symbol of the word is read
   while (word != NULL) {
     // If a TrieNode for the current symbol does not exist - then create one
-    if (current->children[word->value] == NULL) {
+    if (current->children[*(int*) word->value] == NULL) {
       newNode = (struct TrieNode*) malloc(sizeof( struct TrieNode ));
-      newNode->value = word->value;
+      newNode->value = *(int*) word->value;
       newNode->parent = current->index;
       newNode->index = root->value;
 
-      current->children[word->value] = newNode;
+      current->children[*(int*) word->value] = newNode;
 
       // Increment the next index value
       root->value = root->value + 1;
     }
 
-    current = current->children[word->value];
+    current = current->children[*(int*) word->value];
     word = word->next;
   }
 
@@ -53,7 +53,7 @@ struct TrieNode* findInTrie(struct TrieNode* root, struct ListNode* word) {
   struct ListNode* currentListNode = word;
 
   while (currentListNode != NULL) {
-    int value = currentListNode->value;
+    int value = *(int*) currentListNode->value;
 
     if (currentTrieNode->children[value] == NULL) {
       return NULL;

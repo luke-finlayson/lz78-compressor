@@ -6,18 +6,18 @@
 #endif
 
 struct ListNode {
-  int value;
+  void* value;
   struct ListNode* next;
 };
 
-void printListNode(struct ListNode* node) {
-  printf("L: { value: %d }\n", node->value);
+void printListIntNode(struct ListNode* node) {
+  printf("L: { value: %d }\n", *(int*) node->value);
 }
 
 /**
  * Add a new node to the end of a list
 */
-void listAdd(struct ListNode* root, int value) {
+void listAdd(struct ListNode* root, void* value) {
   struct ListNode* current = root;
 
   while (current->next != NULL) {
@@ -50,15 +50,35 @@ bool listCompare(struct ListNode* node1, struct ListNode* node2) {
 /**
  * Output the contents of a list to stdout
 */
-void printList(struct ListNode* node) {
+void printIntList(struct ListNode* node) {
   struct ListNode* current = node;
 
   printf("[ ");
 
   while (current != NULL) {
-    printf("%d ", current->value);
+    printf("%d ", *(int*) current->value);
     current = current->next;
   }
 
   printf("]\n");
+}
+
+/**
+ * Returns the node in the list at the given index,
+ * or NULL if it does not exist
+*/
+struct ListNode* getFromList(struct ListNode* root, int i) {
+  struct ListNode* current = root;
+  int currentIndex = 0;
+
+  while (current != NULL) {
+    if (currentIndex == i) {
+      return current;
+    }
+
+    currentIndex++;
+    current = current->next;
+  }
+
+  return NULL;
 }

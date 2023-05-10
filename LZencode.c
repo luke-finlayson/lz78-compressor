@@ -28,10 +28,10 @@ int main() {
     // Add the symbol to the current phrase - creating the list if it is empty
     if (word == NULL) {
       word = (struct ListNode*) malloc(sizeof( struct ListNode ));
-      word->value = hex;
+      word->value = (void*) &hex;
     }
     else {
-      listAdd(word, hex);
+      listAdd(word, (void*) &hex);
     }
 
     // Add the word to the trie if it doesn't exist
