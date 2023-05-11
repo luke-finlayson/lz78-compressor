@@ -29,6 +29,17 @@ void listAdd(struct ListNode* root, void* value) {
 }
 
 /**
+ * Adds a new node to the start of a list. Returns the new root
+*/
+struct ListNode* listPush(struct ListNode* root, void* value) {
+  struct ListNode* node = (struct ListNode*) malloc(sizeof( struct ListNode ));
+  node->next = root;
+  node->value = value;
+
+  return node;
+}
+
+/**
  * Check if two lists are equal
 */
 bool listCompare(struct ListNode* node1, struct ListNode* node2) {
@@ -51,12 +62,35 @@ bool listCompare(struct ListNode* node1, struct ListNode* node2) {
  * Output the contents of a list to stdout
 */
 void printIntList(struct ListNode* node) {
+  if (node == NULL) {
+    printf("[]");
+    return;
+  }
+
   struct ListNode* current = node;
 
   printf("[ ");
 
   while (current != NULL) {
     printf("%d ", *(int*) current->value);
+    current = current->next;
+  }
+
+  printf("]\n");
+}
+
+void printCharList(struct ListNode* root) {
+  if (root == NULL) {
+    printf("[]");
+    return;
+  }
+
+  struct ListNode* current = root;
+
+  printf("[ ");
+
+  while (current != NULL) {
+    printf("%c ", *(char*) current->value);
     current = current->next;
   }
 
@@ -79,6 +113,22 @@ struct ListNode* getFromList(struct ListNode* root, int i) {
     currentIndex++;
     current = current->next;
   }
+
+  return NULL;
+}
+
+/**
+ * Safety remove every node in a list from memory
+*/
+struct ListNode* clearList(struct ListNode* root) {
+  // Clear the child if not null
+  if (root->next != NULL) {
+    clearList(root->next);
+  }
+
+  // Free up value and node
+  free(root->value);
+  free(root);
 
   return NULL;
 }

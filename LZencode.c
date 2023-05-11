@@ -23,15 +23,16 @@ int main() {
 
   // Read input file nibble by nibble until the end of the file is reached
   while (readerHas(4)) {
-    int hex = read(4);
+    int* hex = (int*) malloc(sizeof( int ));
+    *hex = read(4);
     
     // Add the symbol to the current phrase - creating the list if it is empty
     if (word == NULL) {
       word = (struct ListNode*) malloc(sizeof( struct ListNode ));
-      word->value = (void*) &hex;
+      word->value = (void*) hex;
     }
     else {
-      listAdd(word, (void*) &hex);
+      listAdd(word, (void*) hex);
     }
 
     // Add the word to the trie if it doesn't exist
@@ -43,7 +44,7 @@ int main() {
       write(node->value, BYTE_SIZE);
 
       // Clear the word and start reading in a new phrase
-      word = NULL;
+      word = clearList(word);
     }
   }
 
